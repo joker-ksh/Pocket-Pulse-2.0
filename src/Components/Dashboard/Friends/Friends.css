@@ -1,0 +1,97 @@
+/* Container styling */
+.container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  /* Search bar styling */
+  .search-bar {
+    padding: 10px;
+    width: 960px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* User list styling */
+  .user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* User card styling */
+  .user-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Background color for the card */
+  }
+  
+  /* User photo styling */
+  .user-photo {
+    border-radius: 50%; /* Makes the image circular */
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    margin-right: 15px;
+    border: 3px solid #007bff; /* Adds a blue circular border around the image */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Adds a glowing blue shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .user-photo:hover {
+    transform: scale(1.2); /* Slight zoom effect */
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.8); /* Enhanced glow effect */
+  }
+  
+  /* User info styling */
+  .user-info {
+    flex: 1;
+  }
+  
+  .user-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2563eb;
+  }
+  
+  .user-rating {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Add friend button styling */
+  .msg {
+    margin: 15px;
+    padding: 10px 15px;
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .transact {
+    margin: 15px;
+    padding: 10px 15px;
+    background-color: #338b00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-friend-btn:hover {
+    background-color: #003ba3;
+  }
+  

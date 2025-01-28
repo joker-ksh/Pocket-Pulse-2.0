@@ -1,0 +1,24 @@
+/* Ensure html, body take full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  .background-container {
+    position: fixed; /* Position the background to cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Viewport width */
+    height: 100vh; /* Viewport height */
+    z-index: -1; /* Ensure it stays behind other content */
+    filter: blur(2px);
+  }
+  
+  .background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image will cover the container */
+    display: block; /* Ensures no space below the image */
+  }
+      

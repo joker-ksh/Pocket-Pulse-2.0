@@ -1,0 +1,49 @@
+.hero-container {
+  display: flex;
+  justify-content: center;
+  padding: 5px;  /* Increased padding for more space */
+  height: auto;  /* Let the height adjust to the content */
+  background: transparent;  /* Removed background from the entire container */
+  margin-top: -50px;  /* Moves the section upwards */
+}
+
+.quote {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* Adjust to move content upwards */
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  padding: 110px;
+  width: 100%;
+  background: transparent;  /* Ensure transparency */
+  margin-bottom: 0;  /* Remove the margin to keep both sections aligned */
+  margin-top: -20px;  /* Moves the quote section slightly upwards */
+}
+
+.quote-text {
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 10px;
+}
+
+.additional-text {
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: normal;
+  max-width: 400px;  /* Making sure the additional text fits */
+  text-align: center;
+}
+
+.auth-section {
+  margin-top: 0px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;  /* Aligning auth section in the center vertically */
+  height: auto;
+  padding-top: 0;  /* Set padding to 0 to bring the auth section up */
+}

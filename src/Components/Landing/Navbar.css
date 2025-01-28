@@ -1,0 +1,121 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 120px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent white background */
+    padding: 10px 50px; /* Padding for the navbar */
+    border-radius: 10px; /* Optional: for rounded corners */
+    backdrop-filter: blur(10px); /* Optional: adds a slight blur to the background */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    position: relative;
+}
+
+.nav-logo {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 15px;
+    gap: 90px;
+}
+
+.nav-menu li {
+    color: white; /* Default color for other items */
+    transition: color 0.3s ease; /* Transition for color change */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.nav-menu li:hover {
+    color: #0000ff; /* Change color to blue when hovered */
+}
+
+.nav-contact {
+    background-color: blue;
+    color: #0000ff; /* Blue color by default */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+    padding: 5px 15px; /* Optional: Padding for the contact item */
+    border-radius: 5px; /* Optional: Border-radius for rounded corners */
+}
+
+.nav-contact:hover {
+    color: #fff; /* Change text to white on hover */
+    background-color: white; /* Blue background on hover */
+}
+
+/* For smaller screen sizes, make the navigation responsive */
+@media (max-width: 768px) {
+    /* Make the nav items stack vertically on small screens */
+    .nav {
+        flex-direction: column; /* Stack the nav items vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        text-align: left; /* Align menu items to the left */
+        padding: 20px 10px; /* Add padding */
+    }
+
+    .nav-logo {
+        font-size: 36px;
+    }
+
+    .nav-menu li {
+        font-size: 15px;
+    }
+
+    /* Ensure the Contact menu item is at the bottom */
+    .nav-contact {
+        margin-top: 20px; /* Move Contact button down */
+    }
+
+    /* For mobile screens, make the navbar full width */
+    .nav {
+        margin: 0; /* No side margins */
+        padding: 10px; /* Adjust padding */
+    }
+}
+
+/* Optionally, add a hamburger menu for mobile */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Hide the menu on mobile */
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .nav-menu.open {
+        display: flex; /* Show the menu when the hamburger icon is clicked */
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Hamburger icon */
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger div {
+        width: 30px;
+        height: 4px;
+        background-color: white;
+    }
+}
