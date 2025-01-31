@@ -1,12 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-    font-family: 'Nunito', sans-serif; /* Default font for the whole project */
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif; /* Apply Roboto font to headers */
-  }
-  
-  /* Add additional styling or specificity for various elements */
-  
+  font-family: "Nunito", sans-serif; /* Default font for the whole project */
+}
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto", sans-serif; /* Apply Roboto font to headers */
+}
 
+/* Add additional styling or specificity for various elements */

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import {Sun,Moon,Search,MessageSquare,UserPlus,Send,LogOut,ChevronRight,Star,} from "lucide-react";
+import {Sun,Moon,Search,MessageSquare,UserPlus,Send,LogOut,ChevronRight,Star} from "lucide-react";
 import "./Dashboard.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";//useLocation is a React Hook from the react-router-dom library used to get the current URL/location object in your application
-
 import axios from "axios";
+import { useDispatch,useSelector } from "react-redux";
+import { showToast,hideToast } from "../../ToastState/Toastslice";
 import { useNavigate } from "react-router-dom";
 import Alluser from "./Allusers/Alluser";
 import Friends from "./Friends/Friends";
@@ -15,18 +16,44 @@ const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("profile");
   const location = useLocation();
-  const [hasShownToast, setHasShownToast] = React.useState(false);
+  const dispatch = useDispatch();
+
+  // Safely access toast state with defaults
+  const { message = null, type = null, visible = false } = useSelector(
+    (state) => state.toast || {}
+  );
+
+  const isToastShown = sessionStorage.getItem("toastShown");
 
   React.useEffect(() => {
-    if (location.state?.successMessage && !hasShownToast) { //if success message is there passed from login page and toast is not shown then show the toast
-      toast.success(location.state.successMessage, {
+    if (location.state?.successMessage && !isToastShown) {
+      dispatch(
+        showToast({
+          message: location.state.successMessage,
+          type: "success",
+        })
+      );
+
+      // Mark that the toast has been shown in sessionStorage
+      sessionStorage.setItem("toastShown", "true");
+    }
+
+    // If page is refreshed, ensure toast is not shown again by resetting the state if needed.
+    if (location.state?.resetToast) {
+      dispatch(hideToast());
+    }
+  }, [location.state, dispatch, isToastShown]);
+
+  // 2. Trigger toast when visible and handle on close
+  React.useEffect(() => {
+    if (visible && message) {
+      toast[type](message, {
         position: "top-right",
         autoClose: 3000,
+        onClose: () => dispatch(hideToast()), // Dispatch hideToast on toast close
       });
-      setHasShownToast(true);
     }
-  }, [location.state?.successMessage])
-
+  }, [visible, message, type, dispatch]);
 
   const userData = {
     totalBorrowed: 1500,
@@ -42,6 +69,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
       try{
         const res = await axios.post("http://localhost:5000/api/auth/logout" ,{} , {withCredentials : "true"});
+        sessionStorage.removeItem("toastShown");
         navigate("/",{
           state : {logoutMsg : "Logged out successfully"}
         });

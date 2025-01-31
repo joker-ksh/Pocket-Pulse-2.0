@@ -1,0 +1,147 @@
+/* General container styles */
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full screen height */
+    width: 100vw; /* Full screen width */
+    background-image: url("./bg.png"); /* Background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Profile card styles */
+  .profileCard {
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(30px);
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+  }
+  
+  /* Profile info styling */
+  .profileInfo {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    text-align: left;
+    position: relative;
+  }
+  
+  /* Profile image styling */
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    pointer-events: none; /* Prevent image from capturing click events */
+  }
+  
+  /* Profile name and description styling */
+  .profileName {
+    font-size: 2rem;
+    margin: 0;
+    color: #F5F5F5;
+  }
+  
+  .profileDescription {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    color: #000000;
+  }
+  
+  /* Stats container styling */
+  .statsContainer {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    background-color: rgba(244, 247, 250, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  /* Stats titles and count styling */
+  .statsTitle {
+    margin: 0;
+    font-size: 1rem;
+    color: #F5F5F5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .statsCount {
+    margin: 10px 0 0;
+    font-size: 1.8rem;
+    color: #1e3a5f;
+  }
+  
+  /* Email and last active info styling */
+  .emailContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(244, 247, 250, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .emailTitle, .lastActiveTitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #F5F5F5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .email, .lastActive {
+    margin: 10px 0 0;
+    font-size: 1.2rem;
+    color: #1e3a5f;
+  }
+  
+  /* Button container and button styling */
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+  }
+  
+  /* General button styling */
+  .button {
+    flex: 1;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10; /* Ensure the button is clickable above all other elements */
+  }
+  
+  /* Chat button custom styling */
+  .chatButton {
+    background-color: #3498db; /* Blue */
+    color: white;
+  }
+  
+  /* Transact button custom styling */
+  .transactButton {
+    background-color: #2ecc71; /* Green */
+    color: white;
+  }
+  
