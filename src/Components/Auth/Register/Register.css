@@ -7,157 +7,49 @@ body {
 }
 
 .register-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: url('./background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  position: relative;
+  @apply flex justify-center items-center h-screen bg-cover bg-center relative;
 }
 
-/* Register content background as transparent */
 .register-content {
-  background: rgba(255, 255, 255, 1); /* Adjusted to provide transparency */
-  padding: 30px;
-  border-radius: 8px;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  position: relative;
-  z-index: 2;
+  @apply bg-white bg-opacity-95 p-8 rounded-lg max-w-sm w-full text-center relative z-10;
 }
 
-/* Logo */
-.logo {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 20px;
-  border-radius: 50px;
-}
-
-/* Heading text */
 h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
+  @apply text-2xl text-gray-800 mb-2;
 }
 
-/* Welcome text */
 .welcome-text {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 20px;
+  @apply text-lg text-gray-600 mb-4;
 }
 
-/* Form Styling */
 .register-form {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
 
 .input-container {
-  position: relative;
-  margin-bottom: 20px;
+  @apply relative mb-4;
 }
 
 .input-field {
-  width: calc(100% - 20px);
-  padding: 12px 10px;
-  border: 1px solid rgb(158, 154, 154); 
-  border-radius: 4px;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out; /* Default transition */
-  background-color: transparent; /* Keeping background transparent */
-  outline: none;
+  @apply w-full p-3 border border-gray-400 rounded-md text-lg transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent;
 }
 
-/* On focus and hover, change border to blue */
-.input-field:focus,
-.input-field:hover {
-  border-color: #4285f4; /* Change the border color to blue on focus/hover */
+.input-field:focus {
+  @apply border-blue-500;
 }
 
-.input-label {
-  position: absolute;
-  top: 14px;
-  left: 10px;
-  font-size: 16px;
-  color: #9c9999;
-  pointer-events: none;
-  transition: all 0.5s ease-in-out; /* Slowed down hover text shift animation */
-  opacity: 1;
+input[type="file"] {
+  @apply w-full p-3 border border-gray-400 rounded-md bg-transparent;
 }
 
-/* New Hover Animation */
-.input-container:hover .input-label {
-  top: -20px;
-  left: 8px;
-  font-size: 12px;
-  color: #4285f4;
-  opacity: 1;
-}
-
-/* Label animation for focus and input with content */
-.input-field:focus + .input-label,
-.input-field:not(:placeholder-shown) + .input-label {
-  top: -20px;
-  left: 8px;
-  font-size: 12px;
-  color: #4285f4;
-  opacity: 1;
-}
-
-.input-field:hover {
-  border-color: #4285f4; /* Keep blue border when hovering */
-}
-
-/* Register Button */
 .register-btn {
-  padding: 12px;
-  font-size: 16px;
-  color: white;
-  background-color: #4285f4;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
+  @apply py-3 text-lg text-white bg-blue-500 rounded-md mt-6 cursor-pointer transition-colors hover:bg-blue-700 disabled:bg-gray-400;
 }
 
 .register-btn:hover {
-  background-color: #3367d6;
+  @apply bg-blue-700;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 480px) {
-  .register-content {
-    width: 90%;
-    margin: 0 5%;
-    padding: 20px;
-  }
-
-  .logo {
-    width: 60px;
-    height: 60px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  .welcome-text {
-    font-size: 14px;  
-  }
-
-  .input-field {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .register-btn {
-    font-size: 14px;
-    padding: 10px;
-  }
+.error-message {
+  @apply text-red-500 mb-4;
 }

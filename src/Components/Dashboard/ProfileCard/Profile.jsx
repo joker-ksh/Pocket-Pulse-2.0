@@ -1,202 +1,129 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import bg from './bg.png';
+import axios from "axios";
 
 const Profile = () => {
-  const handleTransactClick = () => {
-    console.log("Transact button clicked");
-    alert("clicked");
+  const [friends, setFriends] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // To toggle the dropdown
+  const totalFriends = 100;
+  const totalRating = 85; // Rating out of 100
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const me = await axios.get('http://localhost:5000/api/user/me', { withCredentials: true });
+        // console.log(me.data);
+        const frnds = me.data.user.friends.length; // count the number of friends
+        setFriends(frnds);
+        const rtng = me.data.user.rating; // get the user rating
+        setRating(rtng);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count < friends) {
+        setFriends((prev) => prev + 1);
+      }
+      if (count < rating) {
+        setRating((prev) => prev + 1);
+      }
+      count++;
+      if (count >= Math.max(friends, rating)) clearInterval(interval);
+    }, 20);
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
   };
 
   return (
-    <div className="container">
-      <div className="profileCard">
-        <div className="profileInfo">
-          <img src="./bg.png" alt="Profile" className="profileImage" />
-          <div>
-            <h2 className="profileName">Pocket Pulse</h2>
-            <p className="profileDescription">How are you guys?</p>
+    <div
+      className="flex items-center justify-center min-h-screen bg-gray-900"
+      style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+    >
+      <div className="bg-gray-800 bg-opacity-90 backdrop-blur-lg p-12 rounded-3xl shadow-2xl flex flex-col items-center w-96 text-center text-gray-200 relative">
+        {/* Edit Button */}
+        <button
+          className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          onClick={toggleDropdown}
+        >
+          Edit
+        </button>
+
+        {/* Dropdown */}
+        {isDropdownOpen && (
+          <div className="absolute top-16 right-4 bg-white text-black p-4 rounded shadow-lg w-40 z-10">
+            <ul>
+              <li className="py-2 hover:bg-gray-200 cursor-pointer">Edit Profile</li>
+              <li className="py-2 hover:bg-gray-200 cursor-pointer">Change Settings</li>
+              <li className="py-2 hover:bg-gray-200 cursor-pointer">Log Out</li>
+            </ul>
+          </div>
+        )}
+
+        <img
+          src={bg}
+          alt="Profile"
+          className="w-28 h-28 rounded mb-6 border-4 border-gray-500"
+        />
+        <h2 className="text-3xl font-bold text-white">John Doe</h2>
+
+        <div className="flex justify-between w-full my-6 text-lg text-gray-300">
+          <div className="flex flex-col items-center">
+            <span className="text-gray-400">Friends</span>
+            <div className="w-20 h-20">
+              <CircularProgressbar
+                value={friends}
+                maxValue={totalFriends}
+                text={`${friends}`}
+                styles={buildStyles({
+                  textColor: "#ddd",
+                  pathColor: "#16A34A",
+                  trailColor: "rgba(255, 255, 255, 0.1)"
+                })}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-gray-400">Rating</span>
+            <div className="w-20 h-20">
+              <CircularProgressbar
+                value={rating}
+                maxValue={100}
+                text={`${rating}%`}
+                styles={buildStyles({
+                  textColor: "#ddd",
+                  pathColor: "#EAB308",
+                  trailColor: "rgba(255, 255, 255, 0.1)"
+                })}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="statsContainer">
-          <div>
-            <p className="statsTitle">Friends</p>
-            <h3 className="statsCount">41</h3>
-          </div>
-          <div>
-            <p className="statsTitle">Transactions</p>
-            <h3 className="statsCount">976</h3>
-          </div>
-          <div>
-            <p className="statsTitle">Rating</p>
-            <h3 className="statsCount">8.5</h3>
-          </div>
-        </div>
-
-        <div className="emailContainer">
-          <div>
-            <p className="emailTitle">Email</p>
-            <h3 className="email">example@gmail.com</h3>
-          </div>
-          <div />
-          <div>
-            <p className="lastActiveTitle">Last Active</p>
-            <h3 className="lastActive">March 2022</h3>
-          </div>
-        </div>
-
-        <div className="buttonContainer">
-          <button className="button chatButton">CHAT</button>
-          <button
-            onClick={handleTransactClick}
-            className="button transactButton"
+        <div className="flex gap-6 mt-6 w-full">
+          <button className="flex-1 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
+            onClick={() => console.log('Follow clicked')}
           >
             Transact
           </button>
+          <button className="flex-1 bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-800"
+            onClick={() => console.log('Message clicked')}
+          >
+            Message
+          </button>
         </div>
       </div>
-
-      <style>{`
-        .container {
-          position: fixed;
-          top: 0;
-          left: 0;
-          height: 100vh;
-          width: 100vw;
-          background-image: url("./bg.png"); /* Use your desired background image */
-          background-size: cover; /* Ensures the image covers the entire screen */
-          background-position: center; /* Centers the background image */
-          background-repeat: no-repeat; /* Prevents the image from repeating */
-          background-attachment: fixed; /* Keeps the background fixed when scrolling */
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .profileCard {
-          background-color: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(30px);
-          width: 400px;
-          border-radius: 10px;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-          overflow: visible;
-          text-align: center;
-          padding: 40px;
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          position: relative;
-        }
-
-        .profileInfo {
-          display: flex;
-          align-items: center;
-          gap: 25px;
-          text-align: left;
-        }
-
-        .profileImage {
-          width: 150px;
-          height: 150px;
-          border-radius: 10px;
-          object-fit: cover;
-        }
-
-        .profileName {
-          font-size: 2rem;
-          margin: 0;
-          color: #F5F5F5;
-        }
-
-        .profileDescription {
-          margin: 10px 0 0;
-          font-size: 1.2rem;
-          color: #000000;
-        }
-
-        .statsContainer {
-          display: flex;
-          justify-content: space-between;
-          text-align: center;
-          background-color: rgba(244, 247, 250, 0.5);
-          padding: 20px;
-          border-radius: 15px;
-        }
-
-        .statsTitle {
-          margin: 0;
-          font-size: 1rem;
-          color: #F5F5F5;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-
-        .statsCount {
-          margin: 10px 0 0;
-          font-size: 1.8rem;
-          color: #1e3a5f;
-        }
-
-        .emailContainer {
-          display: flex;
-          justify-content: space-between;
-          background-color: rgba(244, 247, 250, 0.5);
-          padding: 20px;
-          border-radius: 15px;
-        }
-
-        .emailTitle, .lastActiveTitle {
-          margin: 0;
-          font-size: 0.9rem;
-          color: #F5F5F5;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-
-        .email, .lastActive {
-          margin: 10px 0 0;
-          font-size: 1.2rem;
-          color: #1e3a5f;
-        }
-
-        .buttonContainer {
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-        }
-
-        .button {
-          flex: 1;
-          padding: 15px 25px;
-          border-radius: 10px;
-          font-size: 1rem;
-          font-weight: bold;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .chatButton {
-          background-color: #3498db;
-          color: white;
-        }
-
-        .chatButton:hover {
-          background-color: #2980b9;
-          transform: translateY(-2px);
-        }
-
-        .transactButton {
-          background-color: #2ecc71;
-          color: white;
-        }
-
-        .transactButton:hover {
-          background-color: #27ae60;
-          transform: translateY(-2px);
-        }
-      `}</style>
     </div>
   );
 };

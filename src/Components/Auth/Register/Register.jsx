@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Use useNavigate hook from react-router-dom v6
 import "./Register.css";
-import logo from "./logo.png";
 import Background from "../../Landing/Background";
 
 const Register = () => {
@@ -37,8 +36,8 @@ const Register = () => {
       // After successful registration, you can redirect using navigate
       console.log(response.data.message);
       navigate(`/dashboard?user=${response.data.user.name}&id=${response.data.user.id}`,{
-        state : {successMessage : "Registered in successfully"}
-      }); // Redirect to login page
+        state : {successMessage : "Registered successfully"}
+      }); // Redirect to dashboard
 
     } catch (err) {
       setLoading(false);
@@ -55,8 +54,6 @@ const Register = () => {
     <div className="register-container">
       <Background />
       <div className="register-content">
-        {/* Logo */}
-        <img src={logo} alt="Pocket Pulse Logo" className="logo" />
 
         {/* Welcome Text */}
         <h2>Welcome to Pocket Pulse</h2>
@@ -77,11 +74,8 @@ const Register = () => {
               required
               className="input-field"
               id="name"
-              placeholder=" "
+              placeholder="Name"
             />
-            <label htmlFor="name" className="input-label">
-              Name
-            </label>
           </div>
 
           {/* Email */}
@@ -94,11 +88,8 @@ const Register = () => {
               required
               className="input-field"
               id="email"
-              placeholder=" "
+              placeholder="Email"
             />
-            <label htmlFor="email" className="input-label">
-              Email
-            </label>
           </div>
 
           {/* Password */}
@@ -111,11 +102,18 @@ const Register = () => {
               required
               className="input-field"
               id="password"
-              placeholder=" "
+              placeholder="Password"
             />
-            <label htmlFor="password" className="input-label">
-              Password
-            </label>
+          </div>
+
+          <div>
+            <input
+              type="file"
+              name="image"
+              required
+              className="input-field"
+              id="image"
+            />
           </div>
 
           {/* Register Button */}

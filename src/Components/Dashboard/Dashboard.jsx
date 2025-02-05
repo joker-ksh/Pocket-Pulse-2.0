@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("profile");
   const location = useLocation();
   const dispatch = useDispatch();
+  const [me,setMe] = useState({});
 
   // Safely access toast state with defaults
   const { message = null, type = null, visible = false } = useSelector(
@@ -78,8 +79,11 @@ const Dashboard = () => {
       }
   }
 
+  //profile click logic
   const handleProfileClick = () => {
-    navigate("/Profile");
+    navigate(`/dashboard/Profile`,{
+      state : {successMessage : "Logged in successfully"}
+    });
   }
 
   return (

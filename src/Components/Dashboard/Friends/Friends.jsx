@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Friends.css";
 import axios from "axios";
+import Transact from "./Buttonpopup/Transact";
+import Message from "./Buttonpopup/Message";
 
 const Friends = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [friend, setFriend] = useState([]);
   const [me, setMe] = useState("");
+  const [name,setName] = useState("");
   const [error, setError] = useState(null);
 
   // Search function
@@ -27,10 +30,12 @@ const Friends = () => {
           withCredentials: true,
         });
         const uid = curr_user.data.user.id;
+        const name = curr_user.data.user.name;
         const frnds = curr_user.data.user.friends;
         setFriend(frnds);
         setFilteredUsers(frnds); // Initialize filtered users with all friends
         setMe(uid);
+        setName(name);
       } catch (e) {
         console.log(e);
         setError(e);
@@ -39,10 +44,6 @@ const Friends = () => {
     fetchUser();
   }, []); // Add an empty dependency array to run only once on mount
 
-  // Placeholder for adding a friend
-  const handleAddfriend = (id, name) => {
-    console.log(`Added ${name} with ID: ${id} to your friends!`);
-  };
 
   if (error) {
     return <p>Error: Unable to fetch data.</p>;
@@ -72,18 +73,14 @@ const Friends = () => {
                 <p className="user-rating">Rating: {user.rating || "N/A"}</p>
               </div>
 
-              {/*  */}
-              <button
-                className="msg"
-              >
-                Message
-              </button>
-
-              <button
-                className="transact"
-              >
-                Transact
-              </button>
+              <div className="m-4">
+                <Message />
+              </div>
+              
+              <div className="m-4">
+                <Transact me={me} friend={user._id} naam={name} fnaam={user.name} />
+              </div>
+              
             </div>
           ))
         ) : (

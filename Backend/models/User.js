@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   rating : {
     type : Number,
     required : false,
-    default: null,
+    default: 100,
   },
   friends: [
     {
@@ -34,6 +34,13 @@ const userSchema = new mongoose.Schema({
       name: { type: String, required: true }, // Friend's name
     },
   ],
+  Transactions : [
+    {
+      fid : {type : String, required : true},
+      type : {type : String, required : true},
+      amount : {type : Number, required : true}
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', userSchema);

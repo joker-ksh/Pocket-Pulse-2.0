@@ -58,4 +58,12 @@ const addFriend = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-module.exports = {getUserDetails,getAllUsers,addFriend};
+
+
+
+const pushTransaction = (req,res) => {
+  console.log(req.body);
+  res.send('Transact');
+}
+
+module.exports = {getUserDetails,getAllUsers,addFriend,pushTransaction};
