@@ -28,6 +28,7 @@ The project integrates **Flask** for ML predictions and delivers a smooth end-to
 ---
 
 ## 🤖 Machine Learning Integration  
+model link : https://colab.research.google.com/drive/1t3yjmuqz23ya93RWSGGe4dRbVChMGv47?usp=sharing
 - Extracted **7 key features** from MongoDB transaction data.  
 - Integrated with a **Flask REST API** for prediction requests.  
 - Retrained model with **real user data**, boosting prediction accuracy.  
